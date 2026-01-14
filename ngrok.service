@@ -1,0 +1,21 @@
+[Unit]
+Description=ngrok tunnel
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ngrok start n8n --config /etc/ngrok/ngrok.yml
+
+# 🔥 ВАЖНО: выполняется ПОСЛЕ старта ngrok
+ExecStartPost=/bin/bash -c 'sleep 3 && /Yukxonalar/n8n/update-ngrok-webhook.sh'
+
+Restart=on-failure
+RestartSec=30
+User=root
+LimitNOFILE=1048576
+StandardOutput=append:/var/log/ngrok/ngrok.log
+StandardError=append:/var/log/ngrok/ngrok.log
+
+[Install]
+WantedBy=multi-user.target

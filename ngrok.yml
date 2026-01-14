@@ -1,0 +1,12 @@
+version: "2"
+
+authtoken: YOUR_AUTH_TOKEN
+
+log: /var/log/ngrok/ngrok.log
+log_level: info
+log_format: logfmt
+
+tunnels:
+  n8n:
+    proto: http
+    addr: 127.0.0.1:5678
