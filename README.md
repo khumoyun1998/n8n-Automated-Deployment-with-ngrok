@@ -48,7 +48,7 @@ sudo ./install_ngrok.sh
 ./deploy.sh
 ```
 
-####or
+#### or
 
 ```bash
 # Clone project
@@ -72,6 +72,4 @@ make up
 * Easy, **repeatable deployment** on any server
 * Logs automatically rotated and managed
 * ngrok tunnels are persistent and webhooks auto-updated
-* Safe updates through Git integration
-
 ---
