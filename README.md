@@ -39,12 +39,9 @@ my-n8n-project/
 
 ## **Installation & Deployment**
 
-**On a new server:**
-
 ```bash
 # Clone project
-git clone git@github.com:youruser/my-n8n-project.git /opt/n8n
-cd /opt/n8n
+git clone git@github.com:youruser/my-n8n-project.git
 
 # First-time setup
 sudo ./install_ngrok.sh
@@ -56,15 +53,6 @@ chown -R 1000:1000 ./n8n-data
 # Initial deployment
 ./deploy.sh
 ```
-
-**Updating the project:**
-
-```bash
-cd /opt/n8n
-git pull
-./deploy.sh
-```
-
 ---
 
 ## **Requirements**
