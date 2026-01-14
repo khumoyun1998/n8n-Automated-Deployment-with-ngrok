@@ -72,7 +72,3 @@ chown -R 1000:1000 ./n8n-data
 * Safe updates through Git integration
 
 ---
-
-If you want, I can also write a **shorter, “GitHub-ready README” version** that’s **catchy and professional**, including badges, prerequisites, and quick start instructions.
-
-Do you want me to do that?
