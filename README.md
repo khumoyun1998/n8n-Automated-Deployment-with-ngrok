@@ -57,7 +57,7 @@ git clone https://github.com/khumoyun1998/n8n-Automated-Deployment-with-ngrok.gi
 make up
 ```
 ---
-##### PS : Do not add your auth token from ngrok account to ngrok.yml file
+##### PS : Do not forget to add your auth token from ngrok account to ngrok.yml file
 
 ## **Requirements**
 
