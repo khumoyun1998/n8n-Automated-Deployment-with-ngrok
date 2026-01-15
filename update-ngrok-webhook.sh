@@ -19,6 +19,6 @@ sed -i.bak "s|^WEBHOOK_URL=.*|WEBHOOK_URL=$NEW_URL|" $ENV_FILE
 sed -i.bak "s|^N8N_EDITOR_BASE_URL=.*|N8N_EDITOR_BASE_URL=$NEW_URL|" $ENV_FILE
 
 # Restart n8n container
-docker-compose restart
+docker compose restart
 
-#echo "🚀 n8n restarted with new WEBHOOK_URL"
+echo "🚀 n8n restarted with new WEBHOOK_URL"

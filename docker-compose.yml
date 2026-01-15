@@ -9,6 +9,7 @@ services:
       - N8N_BASIC_AUTH_USER=admin           # change this
       - N8N_BASIC_AUTH_PASSWORD=admin   # change this
       - N8N_SECURE_COOKIE=false
+      - N8N_PROTOCOL=https
     volumes:
       - ./n8n-data:/home/node/.n8n
     env_file:
