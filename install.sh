@@ -57,6 +57,14 @@ PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 if [ ! -f "$CONFIG_PATH" ]; then
   echo "⚙️ Installing ngrok config"
+  echo "Ngrok config check"
+  if ! ngrok config check --config $PROJECT_DIR/ngrok.yml >/dev/null 2>&1; then
+    echo "❌ Error: ngrok.yml is invalid. Please check your syntax."
+    echo "Run 'ngrok config check --config $PROJECT_DIR/ngrok.yml' to see the specific errors."
+    exit 1
+  else 
+    echo "✅ Configuration is valid."
+  fi
   sudo mkdir -p /etc/ngrok
   sudo cp ngrok.yml $CONFIG_PATH
 fi

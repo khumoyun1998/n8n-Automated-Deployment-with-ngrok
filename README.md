@@ -13,8 +13,8 @@ This project provides a **ready-to-deploy automation workflow platform using n8n
 * **Automatic Webhook Update**: A script updates webhook URLs every time ngrok starts or restarts.
 * **Systemd Service for ngrok**: Ensures ngrok runs in the background and restarts automatically on server reboot.
 * **Log Management**: All logs are written to files with logrotate configured to manage log rotation and prevent disk overflow.
-* **Idempotent Installation**: `install_ngrok.sh` sets up ngrok, systemd service, logrotate.
-* **One-command Deployment**: `deploy.sh` starts ngrok, updates webhooks, and runs `docker-compose up -d`.
+* **Idempotent Installation**: `install.sh` sets up ngrok, systemd service, logrotate.
+* **One-command Deployment**: `deploy.sh` starts ngrok, updates webhooks, and runs `docker compose up -d`.
 * **n8n Data Management**: Ensures the `n8n-data` folder exists with proper permissions, preventing container startup errors.
 ---
 
@@ -42,10 +42,13 @@ n8n-Automated-Deployment-with-ngrok/
 git clone https://github.com/khumoyun1998/n8n-Automated-Deployment-with-ngrok.git
 
 # First-time setup
-sudo ./install_ngrok.sh
+sudo ./install.sh
 
 # Initial deployment
 ./deploy.sh
+
+# setting webhook for n8n
+./update-ngrok-webhook.sh
 ```
 
 #### or
@@ -62,8 +65,8 @@ make up
 ## **Requirements**
 
 * Linux server (Ubuntu/Debian recommended)
-* Docker & Docker Compose installed
 * ngrok account (for authtoken)
+* Make installed 
 * Git installed
 
 ---
