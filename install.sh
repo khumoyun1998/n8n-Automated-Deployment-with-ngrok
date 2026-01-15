@@ -63,7 +63,7 @@ fi
 
 if [ ! -f "$SERVICE_PATH" ]; then
   echo "🛠 Installing systemd service"
-  sed "s|{{PROJECT_DIR}}|$PROJECT_DIR|g" ngrok.service.template | sudo tee "$SERVICE_PATH" > /dev/null
+  sed "s|{{PROJECT_DIR}}|$PROJECT_DIR|g" ngrok.service.template
   sudo cp ngrok.service $SERVICE_PATH
   sudo systemctl daemon-reload
   sudo systemctl enable ngrok
