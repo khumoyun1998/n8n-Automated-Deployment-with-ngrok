@@ -20,6 +20,16 @@ chown -R 1000:1000 "$DATA_DIR"
 
 docker compose up -d
 
+sleep 3
+
 sudo systemctl start ngrok
+
+if ! systemctl is-active --quiet ngrok; then
+  echo "❌ ngrok service is not running"
+  exit 1
+fi
+
+echo "✅ ngrok is running"
+
 
 echo "🚀 Deploy complete"
