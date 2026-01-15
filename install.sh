@@ -53,6 +53,7 @@ fi
 
 CONFIG_PATH="/etc/ngrok/ngrok.yml"
 SERVICE_PATH="/etc/systemd/system/ngrok.service"
+PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 if [ ! -f "$CONFIG_PATH" ]; then
   echo "⚙️ Installing ngrok config"
@@ -62,6 +63,7 @@ fi
 
 if [ ! -f "$SERVICE_PATH" ]; then
   echo "🛠 Installing systemd service"
+  sed "s|{{PROJECT_DIR}}|$PROJECT_DIR|g" ngrok.service.template | sudo tee "$SERVICE_PATH" > /dev/null
   sudo cp ngrok.service $SERVICE_PATH
   sudo systemctl daemon-reload
   sudo systemctl enable ngrok

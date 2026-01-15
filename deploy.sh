@@ -18,6 +18,8 @@ fi
 # UID=1000, GID=1000 — пользователь внутри контейнера n8n
 chown -R 1000:1000 "$DATA_DIR"
 
+echo "Build docker image"
+
 docker compose up -d
 
 sleep 3
