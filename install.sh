@@ -35,6 +35,26 @@ fi
 
 echo "✅ Docker ready"
 
+### LOGROTATE
+if ! command -v logrotate &>/dev/null; then
+  echo "🌐 Installing logrotate"
+  apt install -y logrotate
+else
+  echo "✅ logrotate already installed"
+fi
+
+LOG_DIR="/var/log/ngrok"
+sudo mkdir -p "$LOG_DIR"
+sudo chown root:adm "$LOG_DIR"
+
+LOGROTATE_PATH="/etc/logrotate.d/ngrok"
+if [ ! -f "$LOGROTATE_PATH" ]; then
+    echo "🌀 Configurating logrotate..."
+    cp ngrok.logrotate.config "$LOGROTATE_PATH"
+fi
+
+echo "✅ logrotate ready"
+
 ### NGROK
 if command -v ngrok >/dev/null 2>&1; then
   echo "✅ ngrok already installed"
@@ -77,24 +97,4 @@ if [ ! -f "$SERVICE_PATH" ]; then
   sudo systemctl enable ngrok
 fi
 
-echo "✅ ngrok ready"
-
-### LOGROTATE
-if ! command -v logrotate &>/dev/null; then
-  echo "🌐 Installing logrotate"
-  apt install -y logrotate
-else
-  echo "✅ logrotate already installed"
-fi
-
-LOG_DIR="/var/log/ngrok"
-sudo mkdir -p "$LOG_DIR"
-sudo chown root:adm "$LOG_DIR"
-
-LOGROTATE_PATH="/etc/logrotate.d/ngrok"
-if [ ! -f "$LOGROTATE_PATH" ]; then
-    echo "🌀 Configurating logrotate..."
-    cp ngrok.logrotate.config "$LOGROTATE_PATH"
-fi
-
-echo "✅ logrotate ready"
+echo "✅ Ngrok ready"
