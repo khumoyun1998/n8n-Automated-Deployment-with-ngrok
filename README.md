@@ -21,7 +21,7 @@ This project provides a **ready-to-deploy automation workflow platform using n8n
 ## **Directory Structure**
 
 ```
-my-n8n-project/
+n8n-Automated-Deployment-with-ngrok/
 ├─ docker-compose.yml
 ├─ .env                  # Environment variables
 ├─ install_ngrok.sh      # First-time installation script
@@ -39,7 +39,7 @@ my-n8n-project/
 
 ```bash
 # Clone project
-git clone git@github.com:youruser/my-n8n-project.git
+git clone https://github.com/khumoyun1998/n8n-Automated-Deployment-with-ngrok.git
 
 # First-time setup
 sudo ./install_ngrok.sh
@@ -52,7 +52,7 @@ sudo ./install_ngrok.sh
 
 ```bash
 # Clone project
-git clone git@github.com:youruser/my-n8n-project.git
+git clone https://github.com/khumoyun1998/n8n-Automated-Deployment-with-ngrok.git
 
 make up
 ```
