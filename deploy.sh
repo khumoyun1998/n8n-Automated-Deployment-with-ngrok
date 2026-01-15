@@ -3,15 +3,7 @@ set -e
 
 echo "🚀 Starting deploy..."
 
-sudo systemctl start ngrok
-sleep 3
-
-if ! systemctl is-active --quiet ngrok; then
-  echo "❌ ngrok service is not running"
-  exit 1
-fi
-
-echo "✅ ngrok is running"
+./preflight.sh
 
 # ---------------------------
 # 0️⃣ Создаём папку n8n-data и права
@@ -26,8 +18,8 @@ fi
 # UID=1000, GID=1000 — пользователь внутри контейнера n8n
 chown -R 1000:1000 "$DATA_DIR"
 
-
 docker compose up -d
 
-echo "🚀 Deploy complete"
+sudo systemctl start ngrok
 
+echo "🚀 Deploy complete"
