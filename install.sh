@@ -71,14 +71,6 @@ else
   sudo apt install ngrok -y
 fi
 
-### JQ (required by update-ngrok-webhook.sh)
-if ! command -v jq >/dev/null 2>&1; then
-  echo "📦 Installing jq..."
-  apt install -y jq
-else
-  echo "✅ jq already installed"
-fi
-
 CONFIG_PATH="/etc/ngrok/ngrok.yml"
 SERVICE_PATH="/etc/systemd/system/ngrok.service"
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -102,7 +94,7 @@ fi
 
 if [ ! -f "$SERVICE_PATH" ]; then
   echo "🛠 Installing systemd service"
-  sed "s|{{PROJECT_DIR}}|$PROJECT_DIR|g" ngrok.service.template | sudo tee "$SERVICE_PATH" >/dev/null
+  sudo cp ngrok.service.template "$SERVICE_PATH"
   sudo systemctl daemon-reload
   sudo systemctl enable ngrok
 fi

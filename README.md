@@ -25,9 +25,8 @@ n8n-Automated-Deployment-with-ngrok/
 ├─ docker-compose.yml
 ├─ .env.example          # Environment variables template (copy to .env)
 ├─ install.sh            # First-time installation script
-├─ deploy.sh             # Deployment script
-├─ update-ngrok-webhook.sh  # Updates n8n webhook with current ngrok URL
-├─ ngrok.yml             # ngrok configuration
+├─ deploy.sh             # Deployment script (fills .env from ngrok.yml domain)
+├─ ngrok.yml             # ngrok configuration (auth token + static domain)
 ├─ n8n-data/             # Persistent n8n data folder (ignored in Git)
 ├─ Makefile (optional)   # Optional convenience commands
 └─ README.md
@@ -44,11 +43,8 @@ git clone https://github.com/khumoyun1998/n8n-Automated-Deployment-with-ngrok.gi
 # First-time setup
 sudo ./install.sh
 
-# Initial deployment
+# Initial deployment (fills .env from the static domain in ngrok.yml)
 ./deploy.sh
-
-# setting webhook for n8n
-./update-ngrok-webhook.sh
 ```
 
 #### or

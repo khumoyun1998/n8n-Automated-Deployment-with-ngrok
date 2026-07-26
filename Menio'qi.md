@@ -31,9 +31,8 @@ n8n-Automated-Deployment-with-ngrok/
 ├─ docker-compose.yml
 ├─ .env.example          # Muhit o'zgaruvchilari shabloni (.env ga nusxalang)
 ├─ install.sh            # Birinchi marta o'rnatish skripti
-├─ deploy.sh             # Deploy skripti
-├─ update-ngrok-webhook.sh  # ngrok URL ga moslab webhook ni yangilaydi
-├─ ngrok.yml             # ngrok konfiguratsiyasi
+├─ deploy.sh             # Deploy skripti (.env ni ngrok.yml domenidan to'ldiradi)
+├─ ngrok.yml             # ngrok konfiguratsiyasi (authtoken + static domain)
 ├─ n8n-data/             # Doimiy n8n ma'lumot papkasi (Gitda e'tiborga olinmaydi)
 ├─ Makefile (ixtiyoriy)  # Yordamchi buyruqlar
 └─ README.md
@@ -50,11 +49,8 @@ git clone https://github.com/khumoyun1998/n8n-Automated-Deployment-with-ngrok.gi
 # Birinchi marta sozlash
 sudo ./install.sh
 
-# Dastlabki deploy
+# Dastlabki deploy (.env ni ngrok.yml dagi static domendan to'ldiradi)
 ./deploy.sh
-
-# webhook ni sozlash
-./update-ngrok-webhook.sh
 ```
 
 yoki

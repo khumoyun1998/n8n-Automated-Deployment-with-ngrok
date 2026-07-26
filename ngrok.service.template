@@ -7,9 +7,6 @@ Wants=network-online.target
 Type=simple
 ExecStart=/usr/local/bin/ngrok start n8n --config /etc/ngrok/ngrok.yml
 
-# 🔥 ВАЖНО: выполняется ПОСЛЕ старта ngrok
-ExecStartPost=/bin/bash -c 'sleep 3 && {{PROJECT_DIR}}/update-ngrok-webhook.sh || true'
-
 Restart=on-failure
 RestartSec=30
 User=root
