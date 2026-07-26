@@ -1,0 +1,12 @@
+# Environment / secrets
+.env
+.env.bak
+
+# Persistent n8n data
+n8n-data/
+
+# ngrok logs
+*.log
+
+# OS junk
+.DS_Store

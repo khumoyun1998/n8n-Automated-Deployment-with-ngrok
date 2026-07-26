@@ -23,8 +23,8 @@ This project provides a **ready-to-deploy automation workflow platform using n8n
 ```
 n8n-Automated-Deployment-with-ngrok/
 ├─ docker-compose.yml
-├─ .env                  # Environment variables
-├─ install_ngrok.sh      # First-time installation script
+├─ .env.example          # Environment variables template (copy to .env)
+├─ install.sh            # First-time installation script
 ├─ deploy.sh             # Deployment script
 ├─ update-ngrok-webhook.sh  # Updates n8n webhook with current ngrok URL
 ├─ ngrok.yml             # ngrok configuration
@@ -60,7 +60,16 @@ git clone https://github.com/khumoyun1998/n8n-Automated-Deployment-with-ngrok.gi
 make up
 ```
 ---
-##### PS : Do not forget to add your auth token from ngrok account to ngrok.yml file
+##### PS : In `ngrok.yml` set BOTH your ngrok **auth token** and your free **static domain** (ngrok dashboard → Domains). The static domain keeps the public URL stable across restarts, so Telegram webhooks never break.
+
+## **Authentication**
+
+n8n 1.0+ removed the old `N8N_BASIC_AUTH_*` variables. Access is protected by
+n8n's built-in **user management** — the first time you open the public URL,
+n8n asks you to create an owner account. Do this immediately, since the ngrok
+URL is publicly reachable.
+
+---
 
 ## **Requirements**
 

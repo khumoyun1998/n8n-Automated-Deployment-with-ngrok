@@ -1,9 +1,9 @@
 #!/bin/bash
+set -e
 
 sleep 10
 
 ENV_FILE=".env"
-SERVICE_NAME="n8n"
 NGROK_API="http://127.0.0.1:4040/api/tunnels"
 
 # Get current ngrok public URL
@@ -14,11 +14,18 @@ if [ -z "$NEW_URL" ] || [ "$NEW_URL" == "null" ]; then
   exit 1
 fi
 
-# Update .env file
-sed -i.bak "s|^WEBHOOK_URL=.*|WEBHOOK_URL=$NEW_URL|" $ENV_FILE
-sed -i.bak "s|^N8N_EDITOR_BASE_URL=.*|N8N_EDITOR_BASE_URL=$NEW_URL|" $ENV_FILE
+# Host without protocol (e.g. abcd-1-2-3.ngrok-free.app)
+NEW_HOST=${NEW_URL#https://}
 
-# Restart n8n container
+# Update .env file
+sed -i.bak \
+  -e "s|^WEBHOOK_URL=.*|WEBHOOK_URL=$NEW_URL|" \
+  -e "s|^N8N_EDITOR_BASE_URL=.*|N8N_EDITOR_BASE_URL=$NEW_URL|" \
+  -e "s|^N8N_HOST=.*|N8N_HOST=$NEW_HOST|" \
+  "$ENV_FILE"
+rm -f "${ENV_FILE}.bak"
+
+# Restart n8n container to pick up the new URL
 docker compose restart
 
 echo "🚀 n8n restarted with new WEBHOOK_URL"

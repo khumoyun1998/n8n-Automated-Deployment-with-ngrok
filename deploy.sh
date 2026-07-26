@@ -3,6 +3,12 @@ set -e
 
 echo "🚀 Starting deploy..."
 
+# Ensure .env exists (it is gitignored, so fresh clones won't have one)
+if [ ! -f .env ]; then
+    echo "📄 Creating .env from .env.example"
+    cp .env.example .env
+fi
+
 ./preflight.sh
 
 # ---------------------------
@@ -16,7 +22,7 @@ fi
 
 # Присваиваем правильного владельца
 # UID=1000, GID=1000 — пользователь внутри контейнера n8n
-chown -R 1000:1000 "$DATA_DIR"
+sudo chown -R 1000:1000 "$DATA_DIR"
 
 echo "Build docker image"
 

@@ -71,20 +71,29 @@ else
   sudo apt install ngrok -y
 fi
 
+### JQ (required by update-ngrok-webhook.sh)
+if ! command -v jq >/dev/null 2>&1; then
+  echo "📦 Installing jq..."
+  apt install -y jq
+else
+  echo "✅ jq already installed"
+fi
+
 CONFIG_PATH="/etc/ngrok/ngrok.yml"
 SERVICE_PATH="/etc/systemd/system/ngrok.service"
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 if [ ! -f "$CONFIG_PATH" ]; then
   echo "⚙️ Installing ngrok config"
-  echo "Ngrok Token check"
-  if grep -q "YOUR_AUTH_TOKEN" "$PROJECT_DIR/ngrok.yml"; then
+  echo "Ngrok config check (auth token + static domain)"
+  if grep -q "YOUR_AUTH_TOKEN" "$PROJECT_DIR/ngrok.yml" \
+     || grep -q "YOUR_STATIC_DOMAIN" "$PROJECT_DIR/ngrok.yml"; then
     echo "-----------------------------------------------"
     cat "$PROJECT_DIR/ngrok.yml"
     echo "-----------------------------------------------"
-    echo "Set Ngrok auth token"
+    echo "Set your ngrok auth token AND your reserved static domain in ngrok.yml"
     exit 1
-  else 
+  else
     echo "✅ Configuration is valid."
   fi
   sudo mkdir -p /etc/ngrok
@@ -93,8 +102,7 @@ fi
 
 if [ ! -f "$SERVICE_PATH" ]; then
   echo "🛠 Installing systemd service"
-  sed "s|{{PROJECT_DIR}}|$PROJECT_DIR|g" ngrok.service.template || sudo tee ngrok.service.template
-  sudo cp ngrok.service.template $SERVICE_PATH
+  sed "s|{{PROJECT_DIR}}|$PROJECT_DIR|g" ngrok.service.template | sudo tee "$SERVICE_PATH" >/dev/null
   sudo systemctl daemon-reload
   sudo systemctl enable ngrok
 fi

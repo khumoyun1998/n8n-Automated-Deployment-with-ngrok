@@ -10,3 +10,7 @@ tunnels:
   n8n:
     proto: http
     addr: 127.0.0.1:5678
+    # Free static domain from the ngrok dashboard (Domains section).
+    # Keeps the public URL stable across restarts so the Telegram
+    # webhook never breaks. Replace with your own reserved domain.
+    domain: YOUR_STATIC_DOMAIN.ngrok-free.app

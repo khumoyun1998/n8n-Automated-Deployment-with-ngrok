@@ -29,8 +29,8 @@ Ushbu loyiha `n8n` ni Docker ichida ishga tushirish va `ngrok` orqali ommaviy UR
 ```
 n8n-Automated-Deployment-with-ngrok/
 ├─ docker-compose.yml
-├─ .env                  # Muhit o'zgaruvchilari
-├─ install_ngrok.sh      # Birinchi marta o'rnatish skripti
+├─ .env.example          # Muhit o'zgaruvchilari shabloni (.env ga nusxalang)
+├─ install.sh            # Birinchi marta o'rnatish skripti
 ├─ deploy.sh             # Deploy skripti
 ├─ update-ngrok-webhook.sh  # ngrok URL ga moslab webhook ni yangilaydi
 ├─ ngrok.yml             # ngrok konfiguratsiyasi
@@ -68,7 +68,14 @@ make up
 
 ---
 
-PS: `ngrok.yml` fayliga ngrok hisobingizdagi `authtoken` ni qo'shishni unutmang.
+PS: `ngrok.yml` faylida HAM `authtoken` ni, HAM bepul `static domain` ni (ngrok dashboard → Domains) belgilang. Static domain URL ni restartlarda o'zgarmas qiladi, shu tufayli Telegram webhook hech qachon buzilmaydi.
+
+## Autentifikatsiya
+
+n8n 1.0+ eski `N8N_BASIC_AUTH_*` o'zgaruvchilarini olib tashladi. Himoya endi
+n8n ning ichki **foydalanuvchi boshqaruvi** orqali amalga oshiriladi — ommaviy
+URL ni birinchi ochganingizda n8n owner (egasi) akkauntini yaratishni so'raydi.
+ngrok URL ochiq bo'lgani uchun buni darhol bajaring.
 
 ## Talablar
 
